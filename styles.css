@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;800&family=Noto+Serif+TC:wght@600;700&display=swap");
+
 :root {
   --bg-top: #fff6ec;
   --bg-bottom: #ebe3d8;
@@ -28,7 +30,7 @@ html {
 body {
   margin: 0;
   min-height: 100vh;
-  font-family: "Aptos", "Trebuchet MS", "Segoe UI", sans-serif;
+  font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
   color: var(--ink);
   background:
     radial-gradient(circle at 12% 12%, rgba(255, 98, 49, 0.22), transparent 26%),
@@ -120,6 +122,8 @@ button {
   align-items: center;
   gap: 22px;
   color: var(--muted);
+  font-size: 0.95rem;
+  font-weight: 500;
 }
 
 .site-nav a {
@@ -194,9 +198,9 @@ h1,
 h2,
 h3 {
   margin: 0;
-  font-family: "Palatino Linotype", "Book Antiqua", Georgia, serif;
-  line-height: 0.96;
-  letter-spacing: -0.04em;
+  font-family: "Noto Serif TC", "Songti TC", serif;
+  line-height: 1.08;
+  letter-spacing: -0.015em;
 }
 
 h1 {
@@ -265,6 +269,17 @@ li {
 
 .button-link {
   text-decoration: none;
+}
+
+.button-outline {
+  border: 1px solid rgba(23, 24, 29, 0.16);
+  background: rgba(255, 255, 255, 0.68);
+}
+
+.button-cart {
+  background: var(--ink);
+  color: #fff;
+  box-shadow: 0 12px 24px rgba(23, 24, 29, 0.18);
 }
 
 .hero-points {
@@ -703,6 +718,9 @@ li {
   position: sticky;
   top: 122px;
   padding: 30px;
+  background:
+    linear-gradient(165deg, rgba(255, 255, 255, 0.86), rgba(255, 245, 236, 0.78)),
+    var(--surface);
 }
 
 .selection-price {
@@ -760,6 +778,10 @@ li {
   gap: 14px;
 }
 
+.contact-copy h2 {
+  max-width: 14ch;
+}
+
 .contact-card a {
   font-size: clamp(1.3rem, 2vw, 1.8rem);
   font-weight: 700;
@@ -777,7 +799,7 @@ li {
 .toast {
   position: fixed;
   right: 24px;
-  bottom: 24px;
+  bottom: 92px;
   padding: 14px 18px;
   border-radius: 18px;
   background: rgba(23, 24, 29, 0.94);
@@ -1349,7 +1371,7 @@ body.cart-open {
   .toast {
     left: 12px;
     right: 12px;
-    bottom: 12px;
+    bottom: 84px;
     text-align: center;
   }
 
