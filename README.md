@@ -48,8 +48,10 @@ vercel --prod
 ## 檔案說明
 
 - `index.html`: 首頁結構與內容
+- `iphone-details.html`: iPhone 16~17 規格與價格詳細頁
 - `styles.css`: 視覺設計、排版、動畫與響應式樣式
 - `script.js`: 商品篩選、詢價清單計數與互動摘要卡
+- `iphone-details.js`: 詳細頁的規格資料、價格資料與表格渲染
 - `vercel.json`: Vercel 靜態部署設定
 
 ## GitHub 參考方向
