@@ -55,6 +55,7 @@ vercel --prod
 - `script.js`: 商品篩選、詢價清單計數與互動摘要卡
 - `iphone-details.js`: 詳細頁的規格資料、價格資料與表格渲染
 - `macbook-air-details.js`: MacBook Air 詳細頁資料與表格渲染
+- `cart-system.js`: 共用購物車系統（加入購物車、數量調整、刪除、localStorage）
 - `direct-purchase.js`: 直接購買頁互動腳本
 - `vercel.json`: Vercel 靜態部署設定
 
@@ -81,6 +82,6 @@ vercel --prod
 ## 後續可擴充
 
 - 商品詳細頁
-- 購物車與結帳流程
+- 後台訂單管理
 - 後台管理商品資料
 - 串接表單、LINE 或金流

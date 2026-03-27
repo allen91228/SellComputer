@@ -24,9 +24,9 @@
 
       <nav class="site-nav" aria-label="詳細頁導覽">
         <a href="index.html#catalog">回商品區</a>
+        <a href="#market">跨站價格</a>
         <a href="#specs">規格表</a>
         <a href="#prices">容量價格</a>
-        <a href="#market">跨站價格</a>
       </nav>
 
       <a class="header-cta" href="index.html#contact">聯絡顧問</a>
@@ -44,6 +44,30 @@
           <a class="button button-primary" href="direct-purchase.html">直接購買</a>
         </div>
         <p class="details-meta">資料更新時間：<strong id="asof-date">2026-03-27</strong></p>
+      </section>
+
+      <section class="details-section reveal" id="market">
+        <div class="section-heading">
+          <p class="eyebrow">MARKET SNAPSHOT</p>
+          <h2>跨站價格參考</h2>
+          <p>同一容量下，提供 Apple、PChome、momo、AShop 的可抓取價格做快速對照。通路價可能受檔期、贈品組合或機況標示影響。</p>
+        </div>
+        <div class="details-table-wrap">
+          <table class="details-table">
+            <thead>
+              <tr>
+                <th>機型</th>
+                <th>比對容量</th>
+                <th>我們價格</th>
+                <th>Apple 官方</th>
+                <th>PChome 24h</th>
+                <th>momo</th>
+                <th>AShop</th>
+              </tr>
+            </thead>
+            <tbody id="market-table-body"></tbody>
+          </table>
+        </div>
       </section>
 
       <section class="details-grid">
@@ -92,6 +116,7 @@
                 <th>相機</th>
                 <th>續航 (影片播放)</th>
                 <th>容量</th>
+                <th>操作</th>
               </tr>
             </thead>
             <tbody id="spec-table-body"></tbody>
@@ -108,29 +133,6 @@
         <div class="model-grid" id="model-card-grid"></div>
       </section>
 
-      <section class="details-section reveal" id="market">
-        <div class="section-heading">
-          <p class="eyebrow">MARKET SNAPSHOT</p>
-          <h2>跨站價格參考</h2>
-          <p>同一容量下，提供 Apple、PChome、momo、AShop 的可抓取價格做快速對照。通路價可能受檔期、贈品組合或機況標示影響。</p>
-        </div>
-        <div class="details-table-wrap">
-          <table class="details-table">
-            <thead>
-              <tr>
-                <th>機型</th>
-                <th>比對容量</th>
-                <th>我們價格</th>
-                <th>Apple 官方</th>
-                <th>PChome 24h</th>
-                <th>momo</th>
-                <th>AShop</th>
-              </tr>
-            </thead>
-            <tbody id="market-table-body"></tbody>
-          </table>
-        </div>
-      </section>
     </main>
 
     <footer class="site-footer">
@@ -139,6 +141,7 @@
     </footer>
   </div>
 
+  <script src="cart-system.js" defer></script>
   <script src="iphone-details.js" defer></script>
 </body>
 </html>

@@ -252,6 +252,52 @@ function getPriceTypeLabel(type) {
   return "官方價";
 }
 
+function escapeAttr(value) {
+  return String(value)
+    .replace(/&/g, "&amp;")
+    .replace(/"/g, "&quot;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+}
+
+function getModelSellingPrice(model) {
+  const ourPriceInfo = calculateOurPrice(model.market);
+
+  if (ourPriceInfo?.finalPrice) {
+    return ourPriceInfo.finalPrice;
+  }
+
+  const fallback = model.officialPrices.find((item) => Number.isFinite(item.price) && item.price > 0);
+  return fallback ? fallback.price : null;
+}
+
+function getCartSpecLabel(model) {
+  const baseline = model.market?.baseline || "標準款";
+  return `${baseline} / ${model.specs.storage}`;
+}
+
+function getAddToCartButtonMarkup(model) {
+  const price = getModelSellingPrice(model);
+
+  if (!Number.isFinite(price) || price <= 0) {
+    return '<span class="cart-unavailable">暫無售價</span>';
+  }
+
+  return `
+    <button
+      type="button"
+      class="button button-small cart-add-button"
+      data-add-to-cart
+      data-cart-id="${escapeAttr(`iphone-${model.id}`)}"
+      data-cart-name="${escapeAttr(model.name)}"
+      data-cart-spec="${escapeAttr(getCartSpecLabel(model))}"
+      data-cart-price="${price}"
+    >
+      加入購物車
+    </button>
+  `;
+}
+
 function renderSpecTable(visibleModels) {
   specTableBody.innerHTML = "";
 
@@ -264,6 +310,7 @@ function renderSpecTable(visibleModels) {
       <td>${model.specs.camera}</td>
       <td>${model.specs.battery}</td>
       <td>${model.specs.storage}</td>
+      <td class="spec-action-cell">${getAddToCartButtonMarkup(model)}</td>
     `;
     specTableBody.appendChild(row);
   });
