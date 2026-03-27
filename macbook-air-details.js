@@ -2,46 +2,32 @@ const asOfDate = "2026-03-27";
 
 const models = [
   {
-    id: "mba13-10c8g",
+    id: "mba13-m5",
     series: "13",
-    name: "MacBook Air 13 吋 (M4, 10C CPU / 8C GPU)",
+    name: "MacBook Air 13 吋 (M5)",
     specs: {
       display: "13.6 吋 Liquid Retina",
-      chip: "Apple M4（10 核心 CPU / 8 核心 GPU）",
-      memory: "16GB 統一記憶體",
+      chip: "Apple M5（10 核心 CPU / 10 核心 GPU）",
+      memory: "16GB 統一記憶體（可選配）",
       battery: "最長 18 小時",
-      storage: "256GB SSD",
+      storage: "512GB SSD 起",
     },
-    officialPrices: [{ config: "16GB + 256GB SSD", price: 35900, type: "official" }],
-    market: { baseline: "13 吋 / 16GB / 256GB", apple: 35900, pchome: 32900, momo: 29999, ashop: null },
+    officialPrices: [{ config: "13 吋標準配置（16GB / 512GB）", price: 35900, type: "suggested" }],
+    market: { baseline: "13 吋 / 16GB / 512GB", suggested: 35900, eprice: 35900 },
   },
   {
-    id: "mba13-10c10g",
-    series: "13",
-    name: "MacBook Air 13 吋 (M4, 10C CPU / 10C GPU)",
-    specs: {
-      display: "13.6 吋 Liquid Retina",
-      chip: "Apple M4（10 核心 CPU / 10 核心 GPU）",
-      memory: "16GB 統一記憶體",
-      battery: "最長 18 小時",
-      storage: "512GB SSD",
-    },
-    officialPrices: [{ config: "16GB + 512GB SSD", price: 39400, type: "official" }],
-    market: { baseline: "13 吋 / 16GB / 512GB", apple: 39400, pchome: null, momo: null, ashop: null },
-  },
-  {
-    id: "mba15-10c10g",
+    id: "mba15-m5",
     series: "15",
-    name: "MacBook Air 15 吋 (M4, 10C CPU / 10C GPU)",
+    name: "MacBook Air 15 吋 (M5)",
     specs: {
       display: "15.3 吋 Liquid Retina",
-      chip: "Apple M4（10 核心 CPU / 10 核心 GPU）",
-      memory: "16GB 統一記憶體",
+      chip: "Apple M5（10 核心 CPU / 10 核心 GPU）",
+      memory: "16GB 統一記憶體（可選配）",
       battery: "最長 18 小時",
-      storage: "256GB SSD",
+      storage: "512GB SSD 起",
     },
-    officialPrices: [{ config: "16GB + 256GB SSD", price: 42900, type: "official" }],
-    market: { baseline: "15 吋 / 16GB / 256GB", apple: 42900, pchome: null, momo: 35900, ashop: null },
+    officialPrices: [{ config: "15 吋標準配置（16GB / 512GB）", price: 42900, type: "suggested" }],
+    market: { baseline: "15 吋 / 16GB / 512GB", suggested: 42900, eprice: 42900 },
   },
 ];
 
@@ -77,8 +63,9 @@ function getNearestEnding99(value) {
 }
 
 function calculateOurPrice(market) {
-  const pricePool = [market.apple, market.pchome, market.momo, market.ashop]
-    .filter((price) => Number.isFinite(price) && price > 0);
+  const pricePool = [market.suggested, market.eprice].filter(
+    (price) => Number.isFinite(price) && price > 0
+  );
 
   if (pricePool.length === 0) {
     return null;
@@ -94,7 +81,11 @@ function calculateOurPrice(market) {
       ? rounded99
       : roundedInteger;
 
-  return finalPrice;
+  return {
+    minPrice,
+    basePrice,
+    finalPrice,
+  };
 }
 
 function getVisibleModels() {
@@ -103,6 +94,14 @@ function getVisibleModels() {
   }
 
   return models.filter((model) => model.series === activeSeries);
+}
+
+function getPriceTypeLabel(type) {
+  if (type === "suggested") {
+    return "建議售價";
+  }
+
+  return "參考價";
 }
 
 function escapeAttr(value) {
@@ -122,8 +121,8 @@ function normalizeKey(value) {
 
 function getModelSellingPrice(model) {
   const ourPrice = calculateOurPrice(model.market);
-  if (Number.isFinite(ourPrice) && ourPrice > 0) {
-    return ourPrice;
+  if (ourPrice?.finalPrice) {
+    return ourPrice.finalPrice;
   }
 
   const fallback = model.officialPrices.find((item) => Number.isFinite(item.price) && item.price > 0);
@@ -183,7 +182,7 @@ function getOfficialPriceRowButtonMarkup(model, priceItem) {
 }
 
 function getMarketRowButtonMarkup(model, ourPrice) {
-  const price = Number.isFinite(ourPrice) ? ourPrice : getModelSellingPrice(model);
+  const price = ourPrice?.finalPrice ?? getModelSellingPrice(model);
 
   return buildAddToCartButtonMarkup({
     id: `macbook-air-${model.id}-market-${normalizeKey(model.market.baseline)}`,
@@ -221,7 +220,7 @@ function renderModelCards(visibleModels) {
           <tr>
             <td>${priceItem.config}</td>
             <td>${formatNTD(priceItem.price)}</td>
-            <td>${priceItem.type === "official" ? "官方價" : "歷史官方價"}</td>
+            <td>${getPriceTypeLabel(priceItem.type)}</td>
             <td class="mini-action-cell">${getOfficialPriceRowButtonMarkup(model, priceItem)}</td>
           </tr>
         `
@@ -259,11 +258,9 @@ function renderMarketTable(visibleModels) {
     row.innerHTML = `
       <td><strong>${model.name}</strong></td>
       <td>${model.market.baseline}</td>
-      <td>${ourPrice ? `<strong>${formatNTD(ourPrice)}</strong>` : "—"}</td>
-      <td>${formatNTD(model.market.apple)}</td>
-      <td>${formatNTD(model.market.pchome)}</td>
-      <td>${formatNTD(model.market.momo)}</td>
-      <td>${formatNTD(model.market.ashop)}</td>
+      <td>${ourPrice ? `<strong>${formatNTD(ourPrice.finalPrice)}</strong>` : "—"}</td>
+      <td>${formatNTD(model.market.suggested)}</td>
+      <td>${formatNTD(model.market.eprice)}</td>
       <td class="spec-action-cell">${getMarketRowButtonMarkup(model, ourPrice)}</td>
     `;
     marketTableBody.appendChild(row);

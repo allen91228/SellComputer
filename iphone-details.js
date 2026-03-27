@@ -7,17 +7,17 @@ const models = [
     name: "iPhone 16e",
     specs: {
       display: "6.1 吋 OLED",
-      chip: "A18（4 核心 GPU）",
-      camera: "48MP 融合相機（含 2 倍望遠）",
-      battery: "最長 26 小時",
+      chip: "Apple A18",
+      camera: "主相機 48MP（單鏡頭）",
+      battery: "最長 26 小時（影片播放）",
       storage: "128GB / 256GB / 512GB",
     },
     officialPrices: [
-      { capacity: "128GB", price: 21900, type: "official-historical" },
-      { capacity: "256GB", price: 25400, type: "official-historical" },
-      { capacity: "512GB", price: 32400, type: "official-historical" },
+      { capacity: "128GB", price: 21900, type: "suggested" },
+      { capacity: "256GB", price: 25400, type: "suggested" },
+      { capacity: "512GB", price: 32400, type: "suggested" },
     ],
-    market: { baseline: "128GB", apple: 21900, pchome: null, momo: null, ashop: 21900 },
+    market: { baseline: "128GB", suggested: 21900, eprice: 17400 },
   },
   {
     id: "iphone16",
@@ -25,13 +25,17 @@ const models = [
     name: "iPhone 16",
     specs: {
       display: "6.1 吋 OLED",
-      chip: "A18（5 核心 GPU）",
-      camera: "48MP 融合 + 12MP 超廣角",
-      battery: "最長 22 小時",
-      storage: "128GB（官網現售）",
+      chip: "Apple A18",
+      camera: "主相機 48MP（雙鏡頭）",
+      battery: "電量 N/A（固定式）",
+      storage: "128GB / 256GB / 512GB",
     },
-    officialPrices: [{ capacity: "128GB", price: 25900, type: "official" }],
-    market: { baseline: "128GB", apple: 25900, pchome: null, momo: null, ashop: 29900 },
+    officialPrices: [
+      { capacity: "128GB", price: 29900, type: "suggested" },
+      { capacity: "256GB", price: 33400, type: "suggested" },
+      { capacity: "512GB", price: 40400, type: "suggested" },
+    ],
+    market: { baseline: "128GB", suggested: 29900, eprice: 20900 },
   },
   {
     id: "iphone16plus",
@@ -39,53 +43,54 @@ const models = [
     name: "iPhone 16 Plus",
     specs: {
       display: "6.7 吋 OLED",
-      chip: "A18（5 核心 GPU）",
-      camera: "48MP 融合 + 12MP 超廣角",
-      battery: "最長 27 小時",
-      storage: "128GB / 256GB（官網現售）",
+      chip: "Apple A18",
+      camera: "主相機 48MP（雙鏡頭）",
+      battery: "電量 N/A（固定式）",
+      storage: "128GB / 256GB / 512GB",
     },
     officialPrices: [
-      { capacity: "128GB", price: 29900, type: "official" },
-      { capacity: "256GB", price: 33400, type: "official" },
+      { capacity: "128GB", price: 32900, type: "suggested" },
+      { capacity: "256GB", price: 36400, type: "suggested" },
+      { capacity: "512GB", price: 43400, type: "suggested" },
     ],
-    market: { baseline: "128GB", apple: 29900, pchome: null, momo: null, ashop: 32900 },
+    market: { baseline: "128GB", suggested: 32900, eprice: 26500 },
   },
   {
     id: "iphone16pro",
     series: "16",
     name: "iPhone 16 Pro",
     specs: {
-      display: "6.3 吋 OLED ProMotion",
-      chip: "A18 Pro（6 核心 GPU）",
-      camera: "48MP 融合 + 48MP 超廣角 + 12MP 5 倍望遠",
-      battery: "最長 27 小時",
+      display: "6.3 吋 OLED",
+      chip: "Apple A18 Pro",
+      camera: "主相機 48MP（三鏡頭）",
+      battery: "電量 N/A（固定式）",
       storage: "128GB / 256GB / 512GB / 1TB",
     },
     officialPrices: [
-      { capacity: "128GB", price: 36900, type: "official-historical" },
-      { capacity: "256GB", price: 40400, type: "official-historical" },
-      { capacity: "512GB", price: 47400, type: "official-historical" },
-      { capacity: "1TB", price: 54400, type: "official-historical" },
+      { capacity: "128GB", price: 36900, type: "suggested" },
+      { capacity: "256GB", price: 40400, type: "suggested" },
+      { capacity: "512GB", price: 47400, type: "suggested" },
+      { capacity: "1TB", price: 54400, type: "suggested" },
     ],
-    market: { baseline: "128GB", apple: 36900, pchome: 24490, momo: null, ashop: 36900 },
+    market: { baseline: "128GB", suggested: 36900, eprice: 30890 },
   },
   {
     id: "iphone16promax",
     series: "16",
     name: "iPhone 16 Pro Max",
     specs: {
-      display: "6.9 吋 OLED ProMotion",
-      chip: "A18 Pro（6 核心 GPU）",
-      camera: "48MP 融合 + 48MP 超廣角 + 12MP 5 倍望遠",
-      battery: "最長 33 小時",
+      display: "6.9 吋 OLED",
+      chip: "Apple A18 Pro",
+      camera: "主相機 48MP（三鏡頭）",
+      battery: "電量 N/A（固定式）",
       storage: "256GB / 512GB / 1TB",
     },
     officialPrices: [
-      { capacity: "256GB", price: 44900, type: "official-historical" },
-      { capacity: "512GB", price: 51900, type: "official-historical" },
-      { capacity: "1TB", price: 58900, type: "official-historical" },
+      { capacity: "256GB", price: 44900, type: "suggested" },
+      { capacity: "512GB", price: 51900, type: "suggested" },
+      { capacity: "1TB", price: 58900, type: "suggested" },
     ],
-    market: { baseline: "256GB", apple: 44900, pchome: null, momo: null, ashop: 44900 },
+    market: { baseline: "256GB", suggested: 44900, eprice: 39300 },
   },
   {
     id: "iphone17e",
@@ -93,16 +98,16 @@ const models = [
     name: "iPhone 17e",
     specs: {
       display: "6.1 吋 OLED",
-      chip: "A19（4 核心 GPU）",
-      camera: "48MP 融合相機（含 2 倍望遠）",
-      battery: "最長 26 小時",
+      chip: "Apple A19",
+      camera: "主相機 48MP（單鏡頭）",
+      battery: "最長 26 小時（影片播放）",
       storage: "256GB / 512GB",
     },
     officialPrices: [
-      { capacity: "256GB", price: 21900, type: "official" },
-      { capacity: "512GB", price: 28900, type: "official" },
+      { capacity: "256GB", price: 21900, type: "suggested" },
+      { capacity: "512GB", price: 28900, type: "suggested" },
     ],
-    market: { baseline: "256GB", apple: 21900, pchome: null, momo: 21900, ashop: null },
+    market: { baseline: "256GB", suggested: 21900, eprice: 19700 },
   },
   {
     id: "iphone17",
@@ -110,71 +115,71 @@ const models = [
     name: "iPhone 17",
     specs: {
       display: "6.3 吋 OLED",
-      chip: "A19（5 核心 GPU）",
-      camera: "48MP 融合 + 12MP 超廣角",
-      battery: "最長 26 小時",
+      chip: "Apple A19",
+      camera: "主相機 48MP（雙鏡頭）",
+      battery: "電量 N/A（固定式）",
       storage: "256GB / 512GB",
     },
     officialPrices: [
-      { capacity: "256GB", price: 29900, type: "official" },
-      { capacity: "512GB", price: 36900, type: "official" },
+      { capacity: "256GB", price: 29900, type: "suggested" },
+      { capacity: "512GB", price: 36900, type: "suggested" },
     ],
-    market: { baseline: "256GB", apple: 29900, pchome: null, momo: 29400, ashop: null },
+    market: { baseline: "256GB", suggested: 29900, eprice: 27000 },
   },
   {
     id: "iphoneair",
     series: "17",
     name: "iPhone Air",
     specs: {
-      display: "6.6 吋 OLED",
-      chip: "A19 Pro（6 核心 GPU）",
-      camera: "48MP 融合 + 12MP 超廣角",
-      battery: "最長 24 小時",
+      display: "6.5 吋 OLED",
+      chip: "Apple A19 Pro",
+      camera: "主相機 48MP（單鏡頭）",
+      battery: "電量 N/A（固定式）",
       storage: "256GB / 512GB / 1TB",
     },
     officialPrices: [
-      { capacity: "256GB", price: 36900, type: "official" },
-      { capacity: "512GB", price: 43900, type: "official" },
-      { capacity: "1TB", price: 50900, type: "official" },
+      { capacity: "256GB", price: 36900, type: "suggested" },
+      { capacity: "512GB", price: 43900, type: "suggested" },
+      { capacity: "1TB", price: 50900, type: "suggested" },
     ],
-    market: { baseline: "256GB", apple: 36900, pchome: null, momo: 34099, ashop: null },
+    market: { baseline: "256GB", suggested: 36900, eprice: 31200 },
   },
   {
     id: "iphone17pro",
     series: "17",
     name: "iPhone 17 Pro",
     specs: {
-      display: "6.3 吋 OLED ProMotion",
-      chip: "A19 Pro（6 核心 GPU）",
-      camera: "48MP 融合 + 48MP 超廣角 + 48MP 望遠",
-      battery: "最長 31 小時",
+      display: "6.3 吋 OLED",
+      chip: "Apple A19 Pro",
+      camera: "主相機 48MP（三鏡頭）",
+      battery: "電量 N/A（固定式）",
       storage: "256GB / 512GB / 1TB",
     },
     officialPrices: [
-      { capacity: "256GB", price: 39900, type: "official" },
-      { capacity: "512GB", price: 46900, type: "official" },
-      { capacity: "1TB", price: 53900, type: "official" },
+      { capacity: "256GB", price: 39900, type: "suggested" },
+      { capacity: "512GB", price: 46900, type: "suggested" },
+      { capacity: "1TB", price: 53900, type: "suggested" },
     ],
-    market: { baseline: "256GB", apple: 39900, pchome: 39900, momo: 39900, ashop: null },
+    market: { baseline: "256GB", suggested: 39900, eprice: 37000 },
   },
   {
     id: "iphone17promax",
     series: "17",
     name: "iPhone 17 Pro Max",
     specs: {
-      display: "6.9 吋 OLED ProMotion",
-      chip: "A19 Pro（6 核心 GPU）",
-      camera: "48MP 融合 + 48MP 超廣角 + 48MP 望遠",
-      battery: "最長 37 小時",
+      display: "6.9 吋 OLED",
+      chip: "Apple A19 Pro",
+      camera: "主相機 48MP（三鏡頭）",
+      battery: "電量 N/A（固定式）",
       storage: "256GB / 512GB / 1TB / 2TB",
     },
     officialPrices: [
-      { capacity: "256GB", price: 44900, type: "official" },
-      { capacity: "512GB", price: 51900, type: "official" },
-      { capacity: "1TB", price: 58900, type: "official" },
-      { capacity: "2TB", price: 72900, type: "official" },
+      { capacity: "256GB", price: 44900, type: "suggested" },
+      { capacity: "512GB", price: 51900, type: "suggested" },
+      { capacity: "1TB", price: 58900, type: "suggested" },
+      { capacity: "2TB", price: 72900, type: "suggested" },
     ],
-    market: { baseline: "256GB", apple: 44900, pchome: null, momo: 44900, ashop: null },
+    market: { baseline: "256GB", suggested: 44900, eprice: 41500 },
   },
 ];
 
@@ -212,8 +217,9 @@ function getNearestEnding99(value) {
 }
 
 function calculateOurPrice(market) {
-  const pricePool = [market.apple, market.pchome, market.momo, market.ashop]
-    .filter((price) => Number.isFinite(price) && price > 0);
+  const pricePool = [market.suggested, market.eprice].filter(
+    (price) => Number.isFinite(price) && price > 0
+  );
 
   if (pricePool.length === 0) {
     return null;
@@ -245,11 +251,11 @@ function getVisibleModels() {
 }
 
 function getPriceTypeLabel(type) {
-  if (type === "official-historical") {
-    return "歷史官方價";
+  if (type === "suggested") {
+    return "建議售價";
   }
 
-  return "官方價";
+  return "參考價";
 }
 
 function escapeAttr(value) {
@@ -325,7 +331,7 @@ function getOfficialPriceRowButtonMarkup(model, priceItem) {
   return buildAddToCartButtonMarkup({
     id: `iphone-${model.id}-${normalizeKey(priceItem.capacity)}`,
     name: model.name,
-    spec: `${priceItem.capacity} / 官方價格`,
+    spec: `${priceItem.capacity} / 建議售價`,
     price: priceItem.price,
   });
 }
@@ -413,10 +419,8 @@ function renderMarketTable(visibleModels) {
       <td><strong>${model.name}</strong></td>
       <td>${model.market.baseline}</td>
       <td>${ourPrice ? `<strong>${formatNTD(ourPrice.finalPrice)}</strong>` : "—"}</td>
-      <td>${formatNTD(model.market.apple)}</td>
-      <td>${formatNTD(model.market.pchome)}</td>
-      <td>${formatNTD(model.market.momo)}</td>
-      <td>${formatNTD(model.market.ashop)}</td>
+      <td>${formatNTD(model.market.suggested)}</td>
+      <td>${formatNTD(model.market.eprice)}</td>
       <td class="spec-action-cell">${getMarketRowButtonMarkup(model, ourPrice)}</td>
     `;
     marketTableBody.appendChild(row);
