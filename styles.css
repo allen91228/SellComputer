@@ -585,6 +585,25 @@ li {
   place-items: center;
 }
 
+.product-image {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 24px 32px rgba(17, 21, 29, 0.2));
+}
+
+.product-image-stage {
+  max-width: 360px;
+  margin: 8px auto 18px;
+}
+
+.product-image-console {
+  max-width: 290px;
+  max-height: 260px;
+}
+
 .product-visual::before {
   content: "";
   position: absolute;
