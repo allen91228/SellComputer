@@ -414,8 +414,9 @@ li {
   border-radius: 18px;
   border: 8px solid #1d1f29;
   background:
-    radial-gradient(circle at 35% 30%, rgba(255, 255, 255, 0.34), transparent 18%),
-    linear-gradient(135deg, #2e3645 0%, #0e1118 100%);
+    radial-gradient(circle at 28% 32%, rgba(44, 175, 255, 0.2), transparent 18%),
+    radial-gradient(circle at 72% 36%, rgba(255, 108, 54, 0.18), transparent 20%),
+    linear-gradient(135deg, #202632 0%, #090b10 100%);
   box-shadow: 0 20px 28px rgba(17, 21, 29, 0.28);
 }
 
@@ -424,6 +425,7 @@ li {
   width: 44px;
   height: 132px;
   border-radius: 28px;
+  background: linear-gradient(180deg, #3c4148, #1b1f27);
   box-shadow: 0 18px 26px rgba(17, 21, 29, 0.2);
 }
 
@@ -440,7 +442,8 @@ li {
   width: 18px;
   height: 18px;
   transform: translateX(-50%);
-  background: rgba(255, 255, 255, 0.86);
+  background: #20242c;
+  border: 3px solid rgba(255, 255, 255, 0.12);
 }
 
 .joycon::after {
@@ -449,15 +452,28 @@ li {
   width: 28px;
   height: 28px;
   transform: translateX(-50%);
-  border: 3px solid rgba(255, 255, 255, 0.72);
+  border: 3px solid rgba(255, 255, 255, 0.2);
+}
+
+.joycon-left::after {
+  box-shadow: inset 0 0 0 3px rgba(67, 191, 255, 0.85);
+}
+
+.joycon-right::after {
+  box-shadow: inset 0 0 0 3px rgba(255, 116, 67, 0.9);
+}
+
+.joycon-left::before,
+.joycon-right::before {
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.06);
 }
 
 .joycon-left {
-  background: linear-gradient(180deg, #00b8ff, #0089da);
+  border-left: 4px solid rgba(59, 184, 255, 0.88);
 }
 
 .joycon-right {
-  background: linear-gradient(180deg, #ff655d, #e60012);
+  border-right: 4px solid rgba(255, 120, 72, 0.95);
 }
 
 .large.device-phone {
@@ -586,7 +602,9 @@ li {
 }
 
 .product-visual-console::before {
-  background: linear-gradient(160deg, rgba(230, 0, 18, 0.28), rgba(0, 184, 255, 0.2));
+  background:
+    linear-gradient(160deg, rgba(230, 0, 18, 0.3), rgba(255, 255, 255, 0.08)),
+    radial-gradient(circle at 24% 30%, rgba(0, 184, 255, 0.12), transparent 20%);
 }
 
 .product-badge {
