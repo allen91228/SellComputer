@@ -2,8 +2,25 @@ const asOfDate = "2026-03-27";
 
 const models = [
   {
-    id: "mba13-m5",
-    series: "13",
+    id: "macbook-neo-13",
+    series: "neo",
+    name: "MacBook Neo 13 吋 (A18 Pro)",
+    specs: {
+      display: "13 吋 IPS（2408 x 1506）",
+      chip: "Apple A18 Pro（5 核心 GPU 版本）",
+      memory: "8GB 記憶體",
+      battery: "最長 16 小時（串流播放）",
+      storage: "256GB / 512GB SSD",
+    },
+    officialPrices: [
+      { config: "8GB + 256GB SSD", price: 19900, type: "suggested" },
+      { config: "8GB + 512GB SSD", price: 22900, type: "suggested" },
+    ],
+    market: { baseline: "13 吋 / 8GB / 256GB", suggested: 19900, eprice: 19900 },
+  },
+  {
+    id: "macbook-air-13-m5",
+    series: "air",
     name: "MacBook Air 13 吋 (M5)",
     specs: {
       display: "13.6 吋 Liquid Retina",
@@ -12,12 +29,12 @@ const models = [
       battery: "最長 18 小時",
       storage: "512GB SSD 起",
     },
-    officialPrices: [{ config: "13 吋標準配置（16GB / 512GB）", price: 35900, type: "suggested" }],
+    officialPrices: [{ config: "16GB + 512GB SSD", price: 35900, type: "suggested" }],
     market: { baseline: "13 吋 / 16GB / 512GB", suggested: 35900, eprice: 35900 },
   },
   {
-    id: "mba15-m5",
-    series: "15",
+    id: "macbook-air-15-m5",
+    series: "air",
     name: "MacBook Air 15 吋 (M5)",
     specs: {
       display: "15.3 吋 Liquid Retina",
@@ -26,8 +43,36 @@ const models = [
       battery: "最長 18 小時",
       storage: "512GB SSD 起",
     },
-    officialPrices: [{ config: "15 吋標準配置（16GB / 512GB）", price: 42900, type: "suggested" }],
+    officialPrices: [{ config: "16GB + 512GB SSD", price: 42900, type: "suggested" }],
     market: { baseline: "15 吋 / 16GB / 512GB", suggested: 42900, eprice: 42900 },
+  },
+  {
+    id: "macbook-pro-14-m5-pro",
+    series: "pro",
+    name: "MacBook Pro 14 吋 (M5 Pro)",
+    specs: {
+      display: "14.2 吋 Liquid Retina XDR",
+      chip: "Apple M5 Pro（可選 M5 Max）",
+      memory: "M5 Pro 最高 64GB / M5 Max 最高 128GB",
+      battery: "最長 24 小時",
+      storage: "1TB SSD 起（M5 Pro）",
+    },
+    officialPrices: [{ config: "14 吋 M5 Pro 起始配置", price: 54900, type: "suggested" }],
+    market: { baseline: "14 吋 M5 Pro", suggested: 54900, eprice: 54900 },
+  },
+  {
+    id: "macbook-pro-16-m5-pro",
+    series: "pro",
+    name: "MacBook Pro 16 吋 (M5 Pro)",
+    specs: {
+      display: "16.2 吋 Liquid Retina XDR",
+      chip: "Apple M5 Pro（可選 M5 Max）",
+      memory: "M5 Pro 最高 64GB / M5 Max 最高 128GB",
+      battery: "最長 24 小時",
+      storage: "1TB SSD 起（M5 Pro）",
+    },
+    officialPrices: [{ config: "16 吋 M5 Pro 起始配置", price: 89900, type: "suggested" }],
+    market: { baseline: "16 吋 M5 Pro", suggested: 89900, eprice: 89900 },
   },
 ];
 
@@ -165,7 +210,7 @@ function buildAddToCartButtonMarkup({ id, name, spec, price }) {
 
 function getSpecRowButtonMarkup(model) {
   return buildAddToCartButtonMarkup({
-    id: `macbook-air-${model.id}-spec`,
+    id: `macbook-${model.id}-spec`,
     name: model.name,
     spec: getCartSpecLabel(model),
     price: getModelSellingPrice(model),
@@ -174,7 +219,7 @@ function getSpecRowButtonMarkup(model) {
 
 function getOfficialPriceRowButtonMarkup(model, priceItem) {
   return buildAddToCartButtonMarkup({
-    id: `macbook-air-${model.id}-${normalizeKey(priceItem.config)}`,
+    id: `macbook-${model.id}-${normalizeKey(priceItem.config)}`,
     name: model.name,
     spec: priceItem.config,
     price: priceItem.price,
@@ -185,7 +230,7 @@ function getMarketRowButtonMarkup(model, ourPrice) {
   const price = ourPrice?.finalPrice ?? getModelSellingPrice(model);
 
   return buildAddToCartButtonMarkup({
-    id: `macbook-air-${model.id}-market-${normalizeKey(model.market.baseline)}`,
+    id: `macbook-${model.id}-market-${normalizeKey(model.market.baseline)}`,
     name: model.name,
     spec: `比對配置 ${model.market.baseline}`,
     price,
