@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NextPick Select | iPhone、MacBook、Switch 精選官網</title>
+  <meta
+    name="description"
+    content="簡單俐落的電子產品官網示意版，展示 iPhone、MacBook 與 Nintendo Switch 的精選方案。"
+  >
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="backdrop" aria-hidden="true"></div>
+  <div class="page-shell">
+    <header class="site-header">
+      <a class="brand" href="#top" aria-label="NextPick Select 首頁">
+        <span class="brand-mark">NP</span>
+        <span class="brand-text">
+          <strong>NextPick Select</strong>
+          <small>Curated Tech Store</small>
+        </span>
+      </a>
+
+      <nav class="site-nav" aria-label="主要導覽">
+        <a href="#catalog">商品</a>
+        <a href="#benefits">特色</a>
+        <a href="#plans">方案</a>
+        <a href="#contact">聯絡</a>
+      </nav>
+
+      <a class="header-cta" href="#catalog">
+        立即選購
+        <span class="cart-pill">清單 <span id="cart-count">0</span></span>
+      </a>
+    </header>
+
+    <main id="top">
+      <section class="hero">
+        <div class="hero-copy reveal">
+          <p class="eyebrow">SPRING 2026 DROP</p>
+          <h1>一次挑好 iPhone、MacBook 與 Switch。</h1>
+          <p class="hero-lede">
+            這是一個可直接拿來當官網起點的單頁版型。視覺走簡潔高級路線，
+            內容聚焦三款最容易成交的熱門商品，讓你先快速上線，再慢慢補完整購物流程。
+          </p>
+
+          <div class="hero-actions">
+            <a class="button button-primary" href="#catalog">查看精選商品</a>
+            <a class="button button-secondary" href="#contact">聯絡顧問</a>
+          </div>
+
+          <ul class="hero-points" aria-label="服務重點">
+            <li>48 小時內快速出貨</li>
+            <li>支援分期與企業採購</li>
+            <li>一頁完成商品展示與詢價</li>
+          </ul>
+        </div>
+
+        <div class="hero-stage reveal" aria-hidden="true">
+          <div class="stage-panel panel-phone">
+            <div class="device-phone">
+              <div class="device-screen"></div>
+            </div>
+            <div class="panel-copy">
+              <p>iPhone</p>
+              <strong>Creator Pick</strong>
+            </div>
+          </div>
+
+          <div class="stage-panel panel-laptop">
+            <div class="device-laptop">
+              <div class="device-screen"></div>
+              <div class="device-base"></div>
+            </div>
+            <div class="panel-copy">
+              <p>MacBook</p>
+              <strong>Work Anywhere</strong>
+            </div>
+          </div>
+
+          <div class="stage-panel panel-console">
+            <div class="device-switch">
+              <span class="joycon joycon-left"></span>
+              <span class="switch-screen"></span>
+              <span class="joycon joycon-right"></span>
+            </div>
+            <div class="panel-copy">
+              <p>Nintendo Switch</p>
+              <strong>Party Ready</strong>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section catalog" id="catalog">
+        <div class="section-heading reveal">
+          <p class="eyebrow">FEATURED PRODUCTS</p>
+          <h2>精選商品</h2>
+          <p>
+            這裡先放三個主打產品，點選分類可快速切換；右側摘要卡會同步更新，
+            適合之後接購物車、表單或 LINE 詢價。
+          </p>
+        </div>
+
+        <div class="catalog-toolbar reveal">
+          <div class="filter-group" role="tablist" aria-label="商品分類">
+            <button class="filter-button is-active" type="button" data-filter="all" aria-selected="true">全部</button>
+            <button class="filter-button" type="button" data-filter="phone" aria-selected="false">iPhone</button>
+            <button class="filter-button" type="button" data-filter="laptop" aria-selected="false">MacBook</button>
+            <button class="filter-button" type="button" data-filter="console" aria-selected="false">Switch</button>
+          </div>
+
+          <p class="catalog-note">目前價格與文案為示意內容，後續可直接替換成你的正式銷售資訊。</p>
+        </div>
+
+        <div class="catalog-layout">
+          <div class="product-grid">
+            <article class="product-card reveal is-selected" data-category="phone" data-product="iphone" tabindex="0">
+              <div class="product-visual product-visual-phone" aria-hidden="true">
+                <span class="product-badge">熱門首選</span>
+                <div class="device-phone large">
+                  <div class="device-screen"></div>
+                </div>
+              </div>
+
+              <div class="product-body">
+                <p class="product-kicker">手機旗艦</p>
+                <h3>iPhone Creator</h3>
+                <p class="product-description">
+                  適合內容創作、日常通勤與高頻拍攝，首頁主打時最容易吸引行動族群。
+                </p>
+
+                <ul class="product-specs">
+                  <li>鈦金屬感外型呈現高階印象</li>
+                  <li>行動拍攝與社群分享體驗強</li>
+                  <li>適合搭配電信方案或舊機換新</li>
+                </ul>
+
+                <div class="product-footer">
+                  <div>
+                    <p class="price-label">示意專案價</p>
+                    <strong class="product-price">NT$ 34,900</strong>
+                  </div>
+                  <button class="button button-small" type="button" data-add-product="iphone">加入詢價清單</button>
+                </div>
+              </div>
+            </article>
+
+            <article class="product-card reveal" data-category="laptop" data-product="macbook" tabindex="0">
+              <div class="product-visual product-visual-laptop" aria-hidden="true">
+                <span class="product-badge cool">工作首選</span>
+                <div class="device-laptop large">
+                  <div class="device-screen"></div>
+                  <div class="device-base"></div>
+                </div>
+              </div>
+
+              <div class="product-body">
+                <p class="product-kicker">筆電主力</p>
+                <h3>MacBook Flow</h3>
+                <p class="product-description">
+                  主打輕薄、穩定與長時間工作使用場景，適合做高單價商品門面。
+                </p>
+
+                <ul class="product-specs">
+                  <li>辦公、簡報與行動創作兼顧</li>
+                  <li>簡潔畫面很適合企業採購頁面</li>
+                  <li>可延伸成教育或商務專案區塊</li>
+                </ul>
+
+                <div class="product-footer">
+                  <div>
+                    <p class="price-label">示意專案價</p>
+                    <strong class="product-price">NT$ 42,900</strong>
+                  </div>
+                  <button class="button button-small" type="button" data-add-product="macbook">加入詢價清單</button>
+                </div>
+              </div>
+            </article>
+
+            <article class="product-card reveal" data-category="console" data-product="switch" tabindex="0">
+              <div class="product-visual product-visual-console" aria-hidden="true">
+                <span class="product-badge warm">派對人氣</span>
+                <div class="device-switch large">
+                  <span class="joycon joycon-left"></span>
+                  <span class="switch-screen"></span>
+                  <span class="joycon joycon-right"></span>
+                </div>
+              </div>
+
+              <div class="product-body">
+                <p class="product-kicker">家庭娛樂</p>
+                <h3>Switch Party</h3>
+                <p class="product-description">
+                  用鮮明色塊和輕鬆文案做出聚會氛圍，讓整體官網不會只剩冷調科技感。
+                </p>
+
+                <ul class="product-specs">
+                  <li>適合家庭、朋友聚會與送禮需求</li>
+                  <li>色彩辨識度高，轉化用戶注意力快</li>
+                  <li>可往遊戲片與配件頁延伸銷售</li>
+                </ul>
+
+                <div class="product-footer">
+                  <div>
+                    <p class="price-label">示意專案價</p>
+                    <strong class="product-price">NT$ 11,480</strong>
+                  </div>
+                  <button class="button button-small" type="button" data-add-product="switch">加入詢價清單</button>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <aside class="selection-panel reveal" aria-live="polite">
+            <p class="selection-label">目前選擇</p>
+            <h3 id="selection-title">iPhone Creator</h3>
+            <p id="selection-price" class="selection-price">示意專案價 NT$ 34,900</p>
+            <p id="selection-description" class="selection-description">
+              適合內容創作與高頻通勤的主打款式，讓首頁第一屏就有明確的成交主角。
+            </p>
+
+            <ul id="selection-features" class="selection-features">
+              <li>主打高階質感與快速決策</li>
+              <li>適合搭配舊換新或電信方案</li>
+              <li>首頁視覺最容易做出品牌感</li>
+            </ul>
+
+            <div class="selection-tags" id="selection-tags">
+              <span>行動工作</span>
+              <span>內容創作</span>
+              <span>高轉換商品</span>
+            </div>
+
+            <a class="button button-primary selection-cta" href="#plans">看推薦搭配方案</a>
+          </aside>
+        </div>
+      </section>
+
+      <section class="section benefits" id="benefits">
+        <div class="section-heading reveal">
+          <p class="eyebrow">WHY THIS LAYOUT</p>
+          <h2>為什麼這個官網版型適合先上線</h2>
+          <p>
+            先把商品與購買理由講清楚，比一開始就做完整後台更容易推進。
+            這個版本刻意維持結構簡單，方便你下一步接金流、表單或 CMS。
+          </p>
+        </div>
+
+        <div class="benefit-grid">
+          <article class="benefit-card reveal">
+            <span class="benefit-index">01</span>
+            <h3>品牌感足夠</h3>
+            <p>利用大面積留白、材質感陰影與產品裝置輪廓，先把官網氣質建立起來。</p>
+          </article>
+
+          <article class="benefit-card reveal">
+            <span class="benefit-index">02</span>
+            <h3>商品焦點明確</h3>
+            <p>不塞過多產品，讓訪客一進站就知道你賣的是 iPhone、MacBook、Switch。</p>
+          </article>
+
+          <article class="benefit-card reveal">
+            <span class="benefit-index">03</span>
+            <h3>後續好擴充</h3>
+            <p>右側摘要卡與詢價按鈕已經預留互動入口，之後很好銜接購物車或表單。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section plans" id="plans">
+        <div class="section-heading reveal">
+          <p class="eyebrow">CURATED BUNDLES</p>
+          <h2>推薦搭配方案</h2>
+          <p>除了單品，也可以把頁面改成主推套餐，拉高客單價與企業採購吸引力。</p>
+        </div>
+
+        <div class="plan-grid">
+          <article class="plan-card reveal">
+            <p class="plan-label">創作者組</p>
+            <h3>iPhone + MacBook</h3>
+            <p>適合個人工作者、自媒體與學生族群，主打從拍攝到剪輯都能快速完成。</p>
+            <strong>示意優惠 NT$ 75,800</strong>
+          </article>
+
+          <article class="plan-card reveal emphasis">
+            <p class="plan-label">全場景組</p>
+            <h3>工作 + 娛樂一次到位</h3>
+            <p>把 MacBook 當工作核心、iPhone 當行動入口，再用 Switch 補足休閒娛樂場景。</p>
+            <strong>示意優惠 NT$ 86,900</strong>
+          </article>
+
+          <article class="plan-card reveal">
+            <p class="plan-label">家庭歡聚組</p>
+            <h3>iPhone + Switch</h3>
+            <p>適合節慶檔期、送禮活動與門市檔期頁，情緒價值強，也容易做活動文案。</p>
+            <strong>示意優惠 NT$ 44,980</strong>
+          </article>
+        </div>
+      </section>
+
+      <section class="section contact" id="contact">
+        <div class="contact-copy reveal">
+          <p class="eyebrow">CONTACT</p>
+          <h2>先用這個版本上線，之後再補完整商店功能。</h2>
+          <p>
+            如果你要下一步，我們可以把這個頁面再延伸成多頁官網，
+            加上商品內頁、購物車、表單蒐集或金流串接。
+          </p>
+        </div>
+
+        <div class="contact-card reveal">
+          <p class="contact-label">商務聯絡</p>
+          <a href="mailto:sales@nextpick.tw">sales@nextpick.tw</a>
+          <a href="tel:+886212345678">02-1234-5678</a>
+          <div class="selection-tags">
+            <span>企業採購</span>
+            <span>到店取貨</span>
+            <span>團購方案</span>
+          </div>
+          <p class="contact-note">
+            這裡目前是靜態示意資訊，你之後可以替換成自己的 Email、LINE 或表單入口。
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>© <span id="year">2026</span> NextPick Select. This landing page is a demo layout for product showcasing.</p>
+      <p>本頁為示意版型，商品名稱與品牌商標分屬各自權利人。</p>
+    </footer>
+  </div>
+
+  <div class="toast" id="cart-toast" role="status" aria-live="polite"></div>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
