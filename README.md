@@ -49,9 +49,13 @@ vercel --prod
 
 - `index.html`: 首頁結構與內容
 - `iphone-details.html`: iPhone 16~17 規格與價格詳細頁
+- `macbook-air-details.html`: MacBook Air 規格與價格詳細頁
+- `direct-purchase.html`: 直接購買中轉頁（付款串接中）
 - `styles.css`: 視覺設計、排版、動畫與響應式樣式
 - `script.js`: 商品篩選、詢價清單計數與互動摘要卡
 - `iphone-details.js`: 詳細頁的規格資料、價格資料與表格渲染
+- `macbook-air-details.js`: MacBook Air 詳細頁資料與表格渲染
+- `direct-purchase.js`: 直接購買頁互動腳本
 - `vercel.json`: Vercel 靜態部署設定
 
 ## GitHub 參考方向

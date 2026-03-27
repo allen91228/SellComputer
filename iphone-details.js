@@ -320,11 +320,11 @@ function renderMarketTable(visibleModels) {
     row.innerHTML = `
       <td><strong>${model.name}</strong></td>
       <td>${model.market.baseline}</td>
+      <td>${ourPrice ? `<strong>${formatNTD(ourPrice.finalPrice)}</strong>` : "—"}</td>
       <td>${formatNTD(model.market.apple)}</td>
       <td>${formatNTD(model.market.pchome)}</td>
       <td>${formatNTD(model.market.momo)}</td>
       <td>${formatNTD(model.market.ashop)}</td>
-      <td>${ourPrice ? `<strong>${formatNTD(ourPrice.finalPrice)}</strong>` : "—"}</td>
     `;
     marketTableBody.appendChild(row);
   });
