@@ -135,6 +135,10 @@ function getCartSpecLabel(model) {
   return `${baseline} / ${model.specs.storage}`;
 }
 
+function getPriceButtonLabel(price) {
+  return `只要${Number(price).toLocaleString("zh-TW")}元`;
+}
+
 function buildAddToCartButtonMarkup({ id, name, spec, price }) {
   const normalizedPrice = Number(price);
 
@@ -142,17 +146,20 @@ function buildAddToCartButtonMarkup({ id, name, spec, price }) {
     return '<span class="cart-unavailable">暫無售價</span>';
   }
 
+  const buttonLabel = getPriceButtonLabel(Math.round(normalizedPrice));
+
   return `
     <button
       type="button"
-      class="button button-small cart-add-button"
+      class="button button-small cart-add-button cart-price-button"
       data-add-to-cart
       data-cart-id="${escapeAttr(id)}"
       data-cart-name="${escapeAttr(name)}"
       data-cart-spec="${escapeAttr(spec)}"
       data-cart-price="${Math.round(normalizedPrice)}"
     >
-      加入購物車
+      <span class="cart-button-default">${buttonLabel}</span>
+      <span class="cart-button-hover">加入購物車</span>
     </button>
   `;
 }

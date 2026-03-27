@@ -122,13 +122,15 @@
   }
 
   function updateButtonFeedback(button) {
-    const original = button.textContent;
+    const originalHtml = button.dataset.originalLabelHtml || button.innerHTML;
+    button.dataset.originalLabelHtml = originalHtml;
+
     button.classList.add("is-added");
-    button.textContent = "已加入";
+    button.innerHTML = '<span class="cart-button-success">已加入</span>';
 
     window.setTimeout(() => {
       button.classList.remove("is-added");
-      button.textContent = original || "加入購物車";
+      button.innerHTML = button.dataset.originalLabelHtml || "加入購物車";
     }, 900);
   }
 
