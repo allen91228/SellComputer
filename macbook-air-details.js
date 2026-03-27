@@ -174,6 +174,22 @@ function getModelSellingPrice(model) {
   return fallback ? fallback.price : null;
 }
 
+function getPrimaryConfigKey(model) {
+  return model.officialPrices?.[0]?.config || model.market?.baseline || model.name;
+}
+
+function getSharedCartId(model) {
+  return `macbook-${model.id}-${normalizeKey(getPrimaryConfigKey(model))}`;
+}
+
+function getOfficialRowActionPrice(model, priceItem) {
+  if ((model.officialPrices?.length || 0) === 1) {
+    return getModelSellingPrice(model) ?? priceItem.price;
+  }
+
+  return priceItem.price;
+}
+
 function getCartSpecLabel(model) {
   const baseline = model.market?.baseline || "標準款";
   return `${baseline} / ${model.specs.storage}`;
@@ -210,7 +226,7 @@ function buildAddToCartButtonMarkup({ id, name, spec, price }) {
 
 function getSpecRowButtonMarkup(model) {
   return buildAddToCartButtonMarkup({
-    id: `macbook-${model.id}-spec`,
+    id: getSharedCartId(model),
     name: model.name,
     spec: getCartSpecLabel(model),
     price: getModelSellingPrice(model),
@@ -218,11 +234,17 @@ function getSpecRowButtonMarkup(model) {
 }
 
 function getOfficialPriceRowButtonMarkup(model, priceItem) {
+  const hasMultipleConfigs = (model.officialPrices?.length || 0) > 1;
+  const cartId = hasMultipleConfigs
+    ? `macbook-${model.id}-${normalizeKey(priceItem.config)}`
+    : getSharedCartId(model);
+  const specLabel = hasMultipleConfigs ? priceItem.config : getCartSpecLabel(model);
+
   return buildAddToCartButtonMarkup({
-    id: `macbook-${model.id}-${normalizeKey(priceItem.config)}`,
+    id: cartId,
     name: model.name,
-    spec: priceItem.config,
-    price: priceItem.price,
+    spec: specLabel,
+    price: getOfficialRowActionPrice(model, priceItem),
   });
 }
 
@@ -230,9 +252,9 @@ function getMarketRowButtonMarkup(model, ourPrice) {
   const price = ourPrice?.finalPrice ?? getModelSellingPrice(model);
 
   return buildAddToCartButtonMarkup({
-    id: `macbook-${model.id}-market-${normalizeKey(model.market.baseline)}`,
+    id: getSharedCartId(model),
     name: model.name,
-    spec: `比對配置 ${model.market.baseline}`,
+    spec: getCartSpecLabel(model),
     price,
   });
 }

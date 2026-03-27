@@ -97,13 +97,6 @@ function escapeAttr(value) {
     .replace(/>/g, "&gt;");
 }
 
-function normalizeKey(value) {
-  return String(value)
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-+|-+$/g, "");
-}
-
 function getModelSellingPrice(model) {
   const ourPrice = calculateOurPrice(model.market);
   if (Number.isFinite(ourPrice) && ourPrice > 0) {
@@ -112,6 +105,10 @@ function getModelSellingPrice(model) {
 
   const fallback = model.officialPrices.find((item) => Number.isFinite(item.price) && item.price > 0);
   return fallback ? fallback.price : null;
+}
+
+function getSharedCartId(model) {
+  return `switch-${model.id}`;
 }
 
 function getCartSpecLabel(model) {
@@ -149,7 +146,7 @@ function buildAddToCartButtonMarkup({ id, name, spec, price }) {
 
 function getSpecRowButtonMarkup(model) {
   return buildAddToCartButtonMarkup({
-    id: `switch-${model.id}-spec`,
+    id: getSharedCartId(model),
     name: model.name,
     spec: getCartSpecLabel(model),
     price: getModelSellingPrice(model),
@@ -158,10 +155,10 @@ function getSpecRowButtonMarkup(model) {
 
 function getOfficialPriceRowButtonMarkup(model, priceItem) {
   return buildAddToCartButtonMarkup({
-    id: `switch-${model.id}-${normalizeKey(priceItem.config)}`,
+    id: getSharedCartId(model),
     name: model.name,
-    spec: priceItem.config,
-    price: priceItem.price,
+    spec: getCartSpecLabel(model),
+    price: getModelSellingPrice(model),
   });
 }
 
@@ -169,9 +166,9 @@ function getMarketRowButtonMarkup(model, ourPrice) {
   const price = Number.isFinite(ourPrice) ? ourPrice : getModelSellingPrice(model);
 
   return buildAddToCartButtonMarkup({
-    id: `switch-${model.id}-market-${normalizeKey(model.market.baseline)}`,
+    id: getSharedCartId(model),
     name: model.name,
-    spec: `比對方案 ${model.market.baseline}`,
+    spec: getCartSpecLabel(model),
     price,
   });
 }
