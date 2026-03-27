@@ -197,6 +197,45 @@ function formatNTD(value) {
   return `NT$ ${Number(value).toLocaleString("zh-TW")}`;
 }
 
+function getNearestEnding99(value) {
+  const hundred = Math.floor(value / 100) * 100;
+  const candidates = [hundred - 1, hundred + 99, hundred + 199].filter((item) => item > 0);
+  let closest = candidates[0];
+
+  candidates.forEach((candidate) => {
+    if (Math.abs(candidate - value) < Math.abs(closest - value)) {
+      closest = candidate;
+    }
+  });
+
+  return closest;
+}
+
+function calculateOurPrice(market) {
+  const pricePool = [market.apple, market.pchome, market.momo, market.ashop]
+    .filter((price) => Number.isFinite(price) && price > 0);
+
+  if (pricePool.length === 0) {
+    return null;
+  }
+
+  const minPrice = Math.min(...pricePool);
+  const basePrice = minPrice * 0.97;
+  const roundedInteger = Math.round(basePrice);
+  const rounded99 = getNearestEnding99(basePrice);
+
+  const finalPrice =
+    Math.abs(rounded99 - basePrice) <= Math.abs(roundedInteger - basePrice)
+      ? rounded99
+      : roundedInteger;
+
+  return {
+    minPrice,
+    basePrice,
+    finalPrice,
+  };
+}
+
 function getVisibleModels() {
   if (activeSeries === "all") {
     return models;
@@ -276,6 +315,7 @@ function renderMarketTable(visibleModels) {
   marketTableBody.innerHTML = "";
 
   visibleModels.forEach((model) => {
+    const ourPrice = calculateOurPrice(model.market);
     const row = document.createElement("tr");
     row.innerHTML = `
       <td><strong>${model.name}</strong></td>
@@ -284,6 +324,7 @@ function renderMarketTable(visibleModels) {
       <td>${formatNTD(model.market.pchome)}</td>
       <td>${formatNTD(model.market.momo)}</td>
       <td>${formatNTD(model.market.ashop)}</td>
+      <td>${ourPrice ? `<strong>${formatNTD(ourPrice.finalPrice)}</strong>` : "—"}</td>
     `;
     marketTableBody.appendChild(row);
   });
