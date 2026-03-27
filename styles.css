@@ -789,11 +789,25 @@ li {
 
 .site-footer {
   display: flex;
+  align-items: center;
   justify-content: space-between;
   gap: 20px;
   padding: 42px 0 18px;
   color: var(--muted);
   font-size: 0.92rem;
+}
+
+.footer-copy {
+  display: grid;
+  gap: 6px;
+}
+
+.footer-copy p {
+  margin: 0;
+}
+
+.button-home {
+  white-space: nowrap;
 }
 
 .toast {
@@ -1002,6 +1016,11 @@ li {
 
 .spec-action-cell {
   width: 154px;
+  white-space: nowrap;
+}
+
+.mini-action-cell {
+  width: 150px;
   white-space: nowrap;
 }
 
@@ -1279,6 +1298,7 @@ body.cart-open {
 
   .site-footer {
     flex-direction: column;
+    align-items: flex-start;
   }
 }
 
@@ -1338,6 +1358,10 @@ body.cart-open {
   .button,
   .header-cta {
     width: 100%;
+  }
+
+  .site-footer .button-home {
+    width: auto;
   }
 
   .product-body,

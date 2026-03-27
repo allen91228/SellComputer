@@ -260,6 +260,13 @@ function escapeAttr(value) {
     .replace(/>/g, "&gt;");
 }
 
+function normalizeKey(value) {
+  return String(value)
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
 function getModelSellingPrice(model) {
   const ourPriceInfo = calculateOurPrice(model.market);
 
@@ -276,10 +283,10 @@ function getCartSpecLabel(model) {
   return `${baseline} / ${model.specs.storage}`;
 }
 
-function getAddToCartButtonMarkup(model) {
-  const price = getModelSellingPrice(model);
+function buildAddToCartButtonMarkup({ id, name, spec, price }) {
+  const normalizedPrice = Number(price);
 
-  if (!Number.isFinite(price) || price <= 0) {
+  if (!Number.isFinite(normalizedPrice) || normalizedPrice <= 0) {
     return '<span class="cart-unavailable">暫無售價</span>';
   }
 
@@ -288,14 +295,43 @@ function getAddToCartButtonMarkup(model) {
       type="button"
       class="button button-small cart-add-button"
       data-add-to-cart
-      data-cart-id="${escapeAttr(`iphone-${model.id}`)}"
-      data-cart-name="${escapeAttr(model.name)}"
-      data-cart-spec="${escapeAttr(getCartSpecLabel(model))}"
-      data-cart-price="${price}"
+      data-cart-id="${escapeAttr(id)}"
+      data-cart-name="${escapeAttr(name)}"
+      data-cart-spec="${escapeAttr(spec)}"
+      data-cart-price="${Math.round(normalizedPrice)}"
     >
       加入購物車
     </button>
   `;
+}
+
+function getSpecRowButtonMarkup(model) {
+  return buildAddToCartButtonMarkup({
+    id: `iphone-${model.id}-spec`,
+    name: model.name,
+    spec: getCartSpecLabel(model),
+    price: getModelSellingPrice(model),
+  });
+}
+
+function getOfficialPriceRowButtonMarkup(model, priceItem) {
+  return buildAddToCartButtonMarkup({
+    id: `iphone-${model.id}-${normalizeKey(priceItem.capacity)}`,
+    name: model.name,
+    spec: `${priceItem.capacity} / 官方價格`,
+    price: priceItem.price,
+  });
+}
+
+function getMarketRowButtonMarkup(model, ourPriceInfo) {
+  const price = ourPriceInfo?.finalPrice ?? getModelSellingPrice(model);
+
+  return buildAddToCartButtonMarkup({
+    id: `iphone-${model.id}-market-${normalizeKey(model.market.baseline)}`,
+    name: model.name,
+    spec: `比對容量 ${model.market.baseline}`,
+    price,
+  });
 }
 
 function renderSpecTable(visibleModels) {
@@ -310,7 +346,7 @@ function renderSpecTable(visibleModels) {
       <td>${model.specs.camera}</td>
       <td>${model.specs.battery}</td>
       <td>${model.specs.storage}</td>
-      <td class="spec-action-cell">${getAddToCartButtonMarkup(model)}</td>
+      <td class="spec-action-cell">${getSpecRowButtonMarkup(model)}</td>
     `;
     specTableBody.appendChild(row);
   });
@@ -334,6 +370,7 @@ function renderModelCards(visibleModels) {
             <td>${priceItem.capacity}</td>
             <td>${formatNTD(priceItem.price)}</td>
             <td>${getPriceTypeLabel(priceItem.type)}</td>
+            <td class="mini-action-cell">${getOfficialPriceRowButtonMarkup(model, priceItem)}</td>
           </tr>
         `
       )
@@ -348,6 +385,7 @@ function renderModelCards(visibleModels) {
             <th>容量</th>
             <th>價格</th>
             <th>類型</th>
+            <th>操作</th>
           </tr>
         </thead>
         <tbody>${rows}</tbody>
@@ -372,6 +410,7 @@ function renderMarketTable(visibleModels) {
       <td>${formatNTD(model.market.pchome)}</td>
       <td>${formatNTD(model.market.momo)}</td>
       <td>${formatNTD(model.market.ashop)}</td>
+      <td class="spec-action-cell">${getMarketRowButtonMarkup(model, ourPrice)}</td>
     `;
     marketTableBody.appendChild(row);
   });

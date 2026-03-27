@@ -2,46 +2,30 @@ const asOfDate = "2026-03-27";
 
 const models = [
   {
-    id: "mba13-10c8g",
-    series: "13",
-    name: "MacBook Air 13 吋 (M4, 10C CPU / 8C GPU)",
+    id: "switch2-standard",
+    series: "standard",
+    name: "Nintendo Switch 2（不含馬力歐賽車）",
     specs: {
-      display: "13.6 吋 Liquid Retina",
-      chip: "Apple M4（10 核心 CPU / 8 核心 GPU）",
-      memory: "16GB 統一記憶體",
-      battery: "最長 18 小時",
-      storage: "256GB SSD",
+      display: "7.9 吋顯示器",
+      storage: "256GB",
+      package: "主機、Joy-Con 2、底座、充電器、HDMI",
+      note: "不含《瑪利歐賽車世界》",
     },
-    officialPrices: [{ config: "16GB + 256GB SSD", price: 35900, type: "official" }],
-    market: { baseline: "13 吋 / 16GB / 256GB", apple: 35900, pchome: 32900, momo: 29999, ashop: null },
+    officialPrices: [{ config: "標準版主機組", price: 14580, type: "official" }],
+    market: { baseline: "標準版主機組", official: 14580, pchome: 14580, momo: 14680, ashop: null },
   },
   {
-    id: "mba13-10c10g",
-    series: "13",
-    name: "MacBook Air 13 吋 (M4, 10C CPU / 10C GPU)",
+    id: "switch2-bundle-mkw",
+    series: "bundle",
+    name: "Nintendo Switch 2（含馬力歐賽車）",
     specs: {
-      display: "13.6 吋 Liquid Retina",
-      chip: "Apple M4（10 核心 CPU / 10 核心 GPU）",
-      memory: "16GB 統一記憶體",
-      battery: "最長 18 小時",
-      storage: "512GB SSD",
+      display: "7.9 吋顯示器",
+      storage: "256GB",
+      package: "主機、Joy-Con 2、底座、充電器、HDMI、瑪利歐賽車世界",
+      note: "含《瑪利歐賽車世界》同捆內容",
     },
-    officialPrices: [{ config: "16GB + 512GB SSD", price: 39400, type: "official" }],
-    market: { baseline: "13 吋 / 16GB / 512GB", apple: 39400, pchome: null, momo: null, ashop: null },
-  },
-  {
-    id: "mba15-10c10g",
-    series: "15",
-    name: "MacBook Air 15 吋 (M4, 10C CPU / 10C GPU)",
-    specs: {
-      display: "15.3 吋 Liquid Retina",
-      chip: "Apple M4（10 核心 CPU / 10 核心 GPU）",
-      memory: "16GB 統一記憶體",
-      battery: "最長 18 小時",
-      storage: "256GB SSD",
-    },
-    officialPrices: [{ config: "16GB + 256GB SSD", price: 42900, type: "official" }],
-    market: { baseline: "15 吋 / 16GB / 256GB", apple: 42900, pchome: null, momo: 35900, ashop: null },
+    officialPrices: [{ config: "同捆版主機組", price: 15580, type: "official" }],
+    market: { baseline: "同捆版主機組", official: 15580, pchome: 15580, momo: 15780, ashop: null },
   },
 ];
 
@@ -77,7 +61,7 @@ function getNearestEnding99(value) {
 }
 
 function calculateOurPrice(market) {
-  const pricePool = [market.apple, market.pchome, market.momo, market.ashop]
+  const pricePool = [market.official, market.pchome, market.momo, market.ashop]
     .filter((price) => Number.isFinite(price) && price > 0);
 
   if (pricePool.length === 0) {
@@ -131,8 +115,7 @@ function getModelSellingPrice(model) {
 }
 
 function getCartSpecLabel(model) {
-  const baseline = model.market?.baseline || "標準款";
-  return `${baseline} / ${model.specs.storage}`;
+  return `${model.market.baseline} / ${model.specs.storage}`;
 }
 
 function buildAddToCartButtonMarkup({ id, name, spec, price }) {
@@ -159,7 +142,7 @@ function buildAddToCartButtonMarkup({ id, name, spec, price }) {
 
 function getSpecRowButtonMarkup(model) {
   return buildAddToCartButtonMarkup({
-    id: `macbook-air-${model.id}-spec`,
+    id: `switch-${model.id}-spec`,
     name: model.name,
     spec: getCartSpecLabel(model),
     price: getModelSellingPrice(model),
@@ -168,7 +151,7 @@ function getSpecRowButtonMarkup(model) {
 
 function getOfficialPriceRowButtonMarkup(model, priceItem) {
   return buildAddToCartButtonMarkup({
-    id: `macbook-air-${model.id}-${normalizeKey(priceItem.config)}`,
+    id: `switch-${model.id}-${normalizeKey(priceItem.config)}`,
     name: model.name,
     spec: priceItem.config,
     price: priceItem.price,
@@ -179,9 +162,9 @@ function getMarketRowButtonMarkup(model, ourPrice) {
   const price = Number.isFinite(ourPrice) ? ourPrice : getModelSellingPrice(model);
 
   return buildAddToCartButtonMarkup({
-    id: `macbook-air-${model.id}-market-${normalizeKey(model.market.baseline)}`,
+    id: `switch-${model.id}-market-${normalizeKey(model.market.baseline)}`,
     name: model.name,
-    spec: `比對配置 ${model.market.baseline}`,
+    spec: `比對方案 ${model.market.baseline}`,
     price,
   });
 }
@@ -194,10 +177,9 @@ function renderSpecTable(visibleModels) {
     row.innerHTML = `
       <td><strong>${model.name}</strong></td>
       <td>${model.specs.display}</td>
-      <td>${model.specs.chip}</td>
-      <td>${model.specs.memory}</td>
-      <td>${model.specs.battery}</td>
       <td>${model.specs.storage}</td>
+      <td>${model.specs.package}</td>
+      <td>${model.specs.note}</td>
       <td class="spec-action-cell">${getSpecRowButtonMarkup(model)}</td>
     `;
     specTableBody.appendChild(row);
@@ -225,7 +207,7 @@ function renderModelCards(visibleModels) {
     card.className = "model-card";
     card.innerHTML = `
       <h3>${model.name}</h3>
-      <p class="details-note">${model.specs.display} / ${model.specs.chip}</p>
+      <p class="details-note">${model.specs.display} / ${model.specs.storage}</p>
       <table class="mini-table">
         <thead>
           <tr>
@@ -253,7 +235,7 @@ function renderMarketTable(visibleModels) {
       <td><strong>${model.name}</strong></td>
       <td>${model.market.baseline}</td>
       <td>${ourPrice ? `<strong>${formatNTD(ourPrice)}</strong>` : "—"}</td>
-      <td>${formatNTD(model.market.apple)}</td>
+      <td>${formatNTD(model.market.official)}</td>
       <td>${formatNTD(model.market.pchome)}</td>
       <td>${formatNTD(model.market.momo)}</td>
       <td>${formatNTD(model.market.ashop)}</td>
